@@ -1,0 +1,82 @@
+            \r        forw-line
+            \n        forw-line
+            ^X        forw-line
+            ^E        back-line
+            J         forw-line-force
+            K         back-line-force
+            ^C        forw-scroll
+            ^R        back-scroll
+            \40       forw-screen
+            f         forw-screen
+            \kD       forw-screen
+            b         back-screen
+            \ev       back-screen
+            \kU       back-screen
+            z         forw-window
+            w         back-window
+            F         forw-forever
+            \eF       forw-until-hilite
+            R         repaint-flush
+            r         repaint
+            \eu       undo-hilite
+            ^Qr       goto-line
+            ^QR       goto-line
+            p         percent
+            %         percent
+            ^Qc       goto-end
+            ^QC       goto-end
+            \eG       goto-end-buffered
+            =         status
+            :f        status
+            ^Qf       forw-search
+            ^QF       forw-search
+            ?         back-search
+            \e/       forw-search *
+            \e?       back-search *
+            ^L        repeat-search
+            ^P        reverse-search
+            &         filter
+            ^K1       set-mark b
+            ^K2       set-mark c
+            ^K3       set-mark d
+            ^K4       set-mark e
+            ^K5       set-mark f
+            ^K6       set-mark g
+            ^K7       set-mark h
+            ^K8       set-mark i
+            ^K9       set-mark j
+            ^K0       set-mark k
+            ^Q1       goto-mark b
+            ^Q2       goto-mark c
+            ^Q3       goto-mark d
+            ^Q4       goto-mark e
+            ^Q5       goto-mark f
+            ^Q6       goto-mark g
+            ^Q7       goto-mark h
+            ^Q8       goto-mark i
+            ^Q9       goto-mark j
+            ^Q0       goto-mark k
+            E         examine
+            t         next-tag
+            T         prev-tag
+            -         toggle-option
+            s         toggle-option o
+            _         display-option
+            |         pipe
+            !         shell
+            +         firstcmd
+            H         help
+            h         help
+            V         version
+            0         digit
+            1         digit
+            2         digit
+            3         digit
+            4         digit
+            5         digit
+            6         digit
+            7         digit
+            8         digit
+            9         digit
+            ^Kq       quit
+            ^KQ       quit
