@@ -1,0 +1,2 @@
+lesskey $dir/zwlessrc
+INPUTRC=$dir/zwinputrc
