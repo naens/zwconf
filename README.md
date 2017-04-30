@@ -26,6 +26,7 @@ behaves like Zpm3/Wordstar (+?  option to install keybindings only without the t
 + Midnight Commander: TODO
 + mutt: TODO
 + emacs: TODO
++ swap control/caps: (for console, for Xwindow)
 
 ##The installation script
 Allows to install, enable, disable ZW keybindings and to backup if some files need to be overwritten.
