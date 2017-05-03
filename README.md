@@ -32,6 +32,6 @@ behaves like Zpm3/Wordstar (+?  option to install keybindings only without the t
 ## The installation script
 Allows to install, enable, disable ZW keybindings and to backup if some files need to be overwritten.
 
-# TODO's
+## TODO's
 + check installed programs: give options based on what is installed
 
