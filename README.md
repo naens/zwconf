@@ -1,11 +1,11 @@
-#zwconf: Zpm3/Wordstar configurations
-##Description
- + a collection of configuration to allow consistency in linux programs
+# zwconf: Zpm3/Wordstar configurations
+## Description
++ a collection of configuration to allow consistency in linux programs
 keybindings with the Zpm3/Wordstar keybindings
- + a script allowing to select and install install the desired
++ a script allowing to select and install install the desired
 configurations
 
-##Keybindings
+## Keybindings
 
 The keybindings are based on the keybindings of ZPM3 and of WordStar, but with extensions and modification in in an attampt to make them more orthogonal.  For example, the keybindings for the cursor movement are the same as in WordStar and ZPM3, but the deletion has differences:
 + `^G` deletes one char forward. `^H` deletes one char backward
@@ -32,7 +32,12 @@ application key bindings.
   - i3wm: window navigation
   - emacs: TODO
 + mutt: TODO
++ (? dos programs: 4dos, dos navigator configurations ?)
 
-##The installation script
-Allows to install, enable, disable ZW keybindings and to backup if some files need to be overwritten.
+## The installation script
+Allows to install, enable, disable ZW keybindings and to backup if some
+files need to be overwritten.
 
+=======
+## TODO's
++ check installed programs: give options based on what is installed
