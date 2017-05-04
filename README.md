@@ -16,20 +16,23 @@ The purpose is to make the installation/uninstallation easy and minimal, which c
 application key bindings.
 
 ##Available Configurations
-+ zsh: zwsh theme/mode that allows to use ZW keybindings in zsh and that
-behaves like Zpm3/Wordstar (+?  option to install keybindings only without the theme ?+)
-+ bash/readline: allows bash and other programs using readline to be used with ZW keybindings
-+ joe: jstarrc configuration
-+ i3wm: window navigation
-+ mksh: TODO: create a mode (?if possible ?)
-+ less: view and search files and man pages using ZW keybindings
-+ Midnight Commander: TODO
++ shell/terminal
+  - check stty
+  - swap control/caps (console/xwindow)
+  - bash/readline: allows bash and other programs using readline to be used
+    with ZW keybindings
+  - less: view and search files and man pages using ZW keybindings
+  - zsh: zwsh theme/mode that allows to use ZW keybindings in zsh and that
+    behaves like Zpm3/Wordstar (+?  option to install keybindings only without
+    the theme ?+)
+  - mksh: TODO: create a mode (?if possible ?)
+  - Midnight Commander: TODO
++ editors
+  - joe: jstarrc configuration
+  - i3wm: window navigation
+  - emacs: TODO
 + mutt: TODO
-+ emacs: TODO
-+ swap control/caps: (for console, for Xwindow)
 
 ##The installation script
 Allows to install, enable, disable ZW keybindings and to backup if some files need to be overwritten.
-
-# zwconf
 
