@@ -29,8 +29,8 @@ application key bindings.
   - Midnight Commander: TODO
 + editors
   - joe: jstarrc configuration
-  - i3wm: window navigation
   - emacs: TODO
++ i3wm: window navigation
 + mutt: TODO
 + (? dos programs: 4dos, dos navigator configurations ?)
 
