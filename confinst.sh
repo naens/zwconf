@@ -26,5 +26,20 @@ test -n has_less && echo less
 test -n has_zsh && echo zsh
 test -n has_mksh && echo mksh
 test -n has_mc && echo mc
+test -n has_jstar && echo jstar
+test -n has_emacs && echo emacs
 test -n has_i3 && echo i3
 test -n has_mutt && echo mutt
+
+d=$(dirname $0)
+
+# TODO: menu install and backup files
+#       check if config exists: no config => no backup
+
+# joe: dotjoe/ -> ~/.joe, jstarrc -> .jstarrc
+if [ -n $has_jstar ]; then
+    cp -Trvi $d/joe/dotjoe ~/.joe
+    cp -vi $d/joe/jstarrc ~/.jstarrc
+fi
+
+    
