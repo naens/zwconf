@@ -35,8 +35,16 @@ application key bindings.
 + (? dos programs: 4dos, dos navigator configurations ?)
 
 ## The installation script
+
 Allows to install, enable, disable ZW keybindings and to backup if some
 files need to be overwritten.
+
+If a program is not installed, does not offer to install the configuration. 
+If it is installed, finds the configuration file location (only where it is
+readable and writable by the user) and checks whether it is a zwconfig file.  
+If it is, shows as installed in the list, otherwise if the user asks to
+install it, makes a backup.  If the user unchecks already installed
+configurations, the script restores the previous state from backups.
 
 =======
 ## TODO's
