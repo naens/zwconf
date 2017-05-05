@@ -19,7 +19,7 @@ delete char/word/line keybindings:
 The purpose is to make the installation/uninstallation easy and minimal, which can be useful to configure a new system or a user account.  It can also be used on a remote connection in order to quickly configure
 application key bindings.
 
-##Available Configurations
+## Available Configurations
 + shell/terminal
   - check stty
   - swap control/caps (console/xwindow)
