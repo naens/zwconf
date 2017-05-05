@@ -50,6 +50,7 @@ If it is, shows as installed in the list, otherwise if the user asks to
 install it, makes a backup.  If the user unchecks already installed
 configurations, the script restores the previous state from backups.
 
-=======
+------------
+
 ## TODO's
 + check installed programs: give options based on what is installed
