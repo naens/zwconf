@@ -7,10 +7,14 @@ configurations
 
 ## Keybindings
 
-The keybindings are based on the keybindings of ZPM3 and of WordStar, but with extensions and modification in in an attampt to make them more orthogonal.  For example, the keybindings for the cursor movement are the same as in WordStar and ZPM3, but the deletion has differences:
+The keybindings are based on the keybindings of ZPM3 and of WordStar.  Some
+additional keybindings are added in order to make them more complete.  No
+keybindings should contradict ZPM3/WordStar keybindings.  For example, the
+delete char/word/line keybindings:
+
 + `^G` deletes one char forward. `^H` deletes one char backward
 + `^T` deletes the word forward, `^[H` deletes the word backward,`^[Y` deletes the whole word
-+ `^QG` deletes the line forward, `^QH` deletes the line backward, `^Y` deletes the whole line
++ `^QY` deletes the line forward, `^QH` deletes the line backward, `^Y` deletes the whole line
 
 The purpose is to make the installation/uninstallation easy and minimal, which can be useful to configure a new system or a user account.  It can also be used on a remote connection in order to quickly configure
 application key bindings.
