@@ -52,10 +52,19 @@
 (defun kill-whole-word (arg)
   "Kill whole word"
   (interactive "p")
-  (forward-word arg)
+
+  ;; find the beginning of the current word
+  (forward-char nil)
   (backward-word arg)
-  (kill-word arg))
+  (let ((begin-word (point)))
+    ;; find the beginning of the next word
+    (forward-word arg)
+    (forward-word arg)
+    (backward-word arg)
+    (delete-region begin-word (point))))
 (global-set-key (kbd "M-y") 'kill-whole-word)
+
+;; fljs jl  dslj sfd lk
 
 (defun backward-kill-line (arg)
   "Kill ARG lines backward."
@@ -74,7 +83,10 @@
   (interactive "p")
   (if (not mark-active)
       (progn
-	(if block (delete-overlay block))
+	(if (boundp 'block)
+            (progn
+              (delete-overlay block)
+              (makunbound 'block)))
 	(set-mark-command nil))))
 (global-set-key (kbd "C-k b") 'kb)
 
@@ -95,33 +107,47 @@
 	(overlay-put block 'face 'region))))
 (global-set-key (kbd "C-k k") 'kk)
 
+(defun kh (arg)
+  "disables block if block defined"
+  (interactive "p")
+  (if mark-active
+      (progn
+        (setq kb nil)
+        (setq mark-active nil))
+      (if (boundp 'block)
+          (progn
+            (delete-overlay block)
+            (makunbound 'block)))))
+(global-set-key (kbd "C-k h") 'kh)
+
 (defun kc (arg)
   "copies block to current poin"
   (interactive "p")
-  (if (and mkb mkk (not mark-active))
+  (if (boundp 'block)
       (insert (buffer-substring (marker-position mkb) (marker-position mkk)))))
 (global-set-key (kbd "C-k c") 'kc)
 
 (defun kv (arg)
   "inserts text at point"
   (interactive "p")
-  (if (and mkb mkk (not mark-active))
-      (progn
+  (if (boundp 'block)
+      (let ((len (- (marker-position mkk) (marker-position mkb))))
 	(insert (buffer-substring (marker-position mkb) (marker-position mkk)))
 	(delete-region (marker-position mkb) (marker-position mkk))
-	(set-marker mkb (- (point) (- kk kb)))
-	(set-marker mkk (point)))))
+	(set-marker mkb (- (point) len))
+	(set-marker mkk (point))
+	(setq block (make-overlay (marker-position mkb) (marker-position mkk)))
+	(overlay-put block 'face 'region))))
 (global-set-key (kbd "C-k v") 'kv)
 
 (defun ky (arg)
   "deletes block and undefines kb and kk"
   (interactive "p")
-  (if (and mkb mkk (not mark-active))
+  (if (boundp 'block
       (progn
 	(delete-region (marker-position mkb) (marker-position mkk))
-	(setq mkb nil)
-	(setq mkk nil)
-	(delete-overlay block))))  
+	(delete-overlay block)
+        (makunbound 'block)))))
 (global-set-key (kbd "C-k y") 'ky)
 
 ;; example
