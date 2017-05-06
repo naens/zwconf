@@ -73,7 +73,9 @@
   "sets mark if no mark defined"
   (interactive "p")
   (if (not mark-active)
-      (set-mark-command nil)))
+      (progn
+	(if block (delete-overlay block))
+	(set-mark-command nil))))
 (global-set-key (kbd "C-k b") 'kb)
 
 (defun kk (arg)
@@ -88,7 +90,9 @@
 	(set-marker mkk kk)
 	(set-mark-command nil)
 	(message "kb=%d kk=%d" kb kk)
-	(setq mark-active nil))))
+	(setq mark-active nil)
+	(setq block (make-overlay kb kk))
+	(overlay-put block 'face 'region))))
 (global-set-key (kbd "C-k k") 'kk)
 
 (defun kc (arg)
@@ -102,10 +106,9 @@
   "inserts text at point"
   (interactive "p")
   (if (and mkb mkk (not mark-active))
-      (let ((kb (marker-position mkb))
-	    (kk (marker-position mkk)))
-	(insert (buffer-substring kb kk))
-	(delete-region kb kk)
+      (progn
+	(insert (buffer-substring (marker-position mkb) (marker-position mkk)))
+	(delete-region (marker-position mkb) (marker-position mkk))
 	(set-marker mkb (- (point) (- kk kb)))
 	(set-marker mkk (point)))))
 (global-set-key (kbd "C-k v") 'kv)
@@ -117,8 +120,9 @@
       (progn
 	(delete-region (marker-position mkb) (marker-position mkk))
 	(setq mkb nil)
-	(setq mkk nil))))  
+	(setq mkk nil)
+	(delete-overlay block))))  
 (global-set-key (kbd "C-k y") 'ky)
- 
+
 ;; example
 ; (global-set-key (kbd "C-x C-x") 'mode-specific-command-prefix)
