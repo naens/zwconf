@@ -1,17 +1,7 @@
 ;;; trying to define Zpm3/Wordstar key bindings for emacs
 (setq global-map (make-keymap))
 
-(lookup-key (current-global-map) (kbd "C-d"))
-
 (setq alphabet "abcdefghijklmnopqrstuvwxyz")
-
-(message "abcd")
-(message "ABCD")
-(message "0123")
-(for ([letter alphabet])
-     (displayln letter))
-
-(format "%s---%c" "abc" ?d)
 
 (defun free-letter (c)
   (let* ((o (format "C-%c" c))
