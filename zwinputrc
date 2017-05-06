@@ -1,3 +1,5 @@
+set bind-tty-special-chars Off
+
 # Cursor Keys
 "\C-e": previous-history
 "\C-x": next-history
@@ -461,6 +463,7 @@
 "\C-x\C-e":
 "\C-x)":
 "\C-x\C-x":
+"\C-x\C-u":
 "\C-x*":
 "\C-xg":
 "\C-x!":
