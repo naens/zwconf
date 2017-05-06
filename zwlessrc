@@ -1,7 +1,9 @@
             \r        forw-line
             \n        forw-line
             ^X        forw-line
+            ^Z        forw-line
             ^E        back-line
+            ^W        back-line
             J         forw-line-force
             K         back-line-force
             ^C        forw-scroll
