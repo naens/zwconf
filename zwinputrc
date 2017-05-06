@@ -32,7 +32,7 @@ set bind-tty-special-chars Off
 
 # Undo Keys
 "\C-u": undo
-# ^6: redo
+#"\C-6": redo
 
 # Find Keys: TODO
 # ^Qf: initialize search
@@ -54,6 +54,7 @@ set bind-tty-special-chars Off
 "\C-m": accept-line
 "\C-v": overwrite-mode
 "\C-i": complete
+"\C-b":
 
 # Mark
 "\C-k1": set-mark
@@ -474,3 +475,4 @@ set bind-tty-special-chars Off
 "\C-x\C-r":
 "\C-x(":
 "\C-k":
+"\er": re-read-init-file
