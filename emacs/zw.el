@@ -69,5 +69,54 @@
 (global-set-key (kbd "C-k x") 'save-buffers-kill-terminal)
 (global-set-key (kbd "C-k q") 'kill-buffer)
 
+(defun kb (arg)
+  "sets mark if no mark defined"
+  (interactive "p")
+  (if (not mark-active)
+      (set-mark-command nil)))
+(global-set-key (kbd "C-k b") 'kb)
+
+;; TODO: make kb/kk match the right region even if text before is modified
+(defun kk (arg)
+  "sets the second element of the block"
+  (interactive "p")
+  (if mark-active
+      (progn
+	(setq kb (min (mark) (point)))
+	(setq kk (max (mark) (point)))
+	(set-mark-command nil)
+	(message "kb=%d kk=%d" kb kk)
+	(setq mark-active nil))))
+(global-set-key (kbd "C-k k") 'kk)
+
+;; TODO: update kb, kk if after point
+(defun kc (arg)
+  "copies block to current poin"
+  (interactive "p")
+  (if (and kb kk (not mark-active))
+      (insert (buffer-substring kb kk))))
+(global-set-key (kbd "C-k c") 'kc)
+
+(defun kv (arg)
+  "inserts text at point"
+  (interactive "p")
+  (if (and kb kk (not mark-active))
+      (progn
+	(insert (buffer-substring kb kk))
+	(delete-region kb kk)
+	(setq kb (- (point) (- kk kb)))
+	(setq kk (point)))))
+(global-set-key (kbd "C-k v") 'kv)
+
+(defun ky (arg)
+  "deletes block and undefines kb and kk"
+  (interactive "p")
+  (if (and kb kk (not mark-active))
+      (progn
+	(delete-region kb kk)
+	(setq kb nil)
+	(setq kk nil))))  
+(global-set-key (kbd "C-k y") 'ky)
+ 
 ;; example
 ; (global-set-key (kbd "C-x C-x") 'mode-specific-command-prefix)
