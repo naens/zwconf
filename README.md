@@ -50,6 +50,11 @@ If it is, shows as installed in the list, otherwise if the user asks to
 install it, makes a backup.  If the user unchecks already installed
 configurations, the script restores the previous state from backups.
 
+As much as possible prioritize the use of environment variables for  file
+location over default localtion.  The user should have the possibility to
+choose the location for the installation folder, which contains a folder
+with backup scripts as well as ZW configuration scripts.
+
 ------------
 
 ## TODO's
