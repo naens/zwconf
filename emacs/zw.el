@@ -77,6 +77,7 @@
 (global-set-key (kbd "C-k s") 'save-buffer)
 (global-set-key (kbd "C-k x") 'save-buffers-kill-terminal)
 (global-set-key (kbd "C-k q") 'kill-buffer)
+(global-set-key (kbd "C-k e") 'find-file)
 
 (defun kb (arg)
   "sets mark if no mark defined"
