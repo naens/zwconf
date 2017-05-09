@@ -8,7 +8,6 @@
          (k (lookup-key (current-global-map) (kbd o))))
     (if k
         (let ((n (format "C-' C-%c" c)))
-          (message "c=%c k=%s n=%s" c k n)
           (global-set-key (kbd n) k)
           (global-set-key (kbd o) nil)))))
 
@@ -79,6 +78,7 @@
 (global-set-key (kbd "C-k q") 'kill-buffer)
 (global-set-key (kbd "C-k e") 'find-file)
 
+;;; block functions
 (defun kb (arg)
   "sets mark if no mark defined"
   (interactive "p")
@@ -152,4 +152,44 @@
 (global-set-key (kbd "C-k y") 'ky)
 
 ;; example
-; (global-set-key (kbd "C-x C-x") 'mode-specific-command-prefix)
+					; (global-set-key (kbd "C-x C-x") 'mode-specific-command-prefix)
+
+;; TODO: save/get kb/kk line and column...
+(string-to-number (format-mode-line "%l"))
+(string-to-number (format-mode-line "%c"))
+
+;; TODO: do not move selection on insertion on a line before selection...
+(defun select-rect (froml fromc tol toc)
+  "selects the rectangle"
+  (setq line froml)
+  (save-excursion
+    (goto-char (point-min))
+    (setq start (point))
+    (goto-char start)
+    (forward-line line)
+    (delblock)
+    (setq block nil)
+    (while (< line tol)
+      (setq pos (point))
+      (forward-line 1)
+      (setq nextpos (point))
+      (setq from (min (- nextpos 1) (+ pos fromc)))
+      (setq to (min (- nextpos 1) (+ pos toc)))
+      (message (format "line=%d pos=%d from=%d to=%d" line pos from to))
+      (setq bl (make-overlay from to))
+      (setq block (cons bl block))
+      (overlay-put bl 'face 'region)
+      (setq line (1+ line)))))
+
+(defun delblock ()
+    (cl-labels ((rec (bl)
+		     (if bl
+			 (progn
+			   (delete-overlay (car bl))
+			   (rec (cdr bl))))))
+      (rec block)))
+
+(delblock)
+
+(select-rect 175 10 185 20)
+  
