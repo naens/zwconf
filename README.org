@@ -13,7 +13,7 @@ keybindings should contradict ZPM3/WordStar keybindings.  For example, the
 delete char/word/line keybindings:
 
 + ~^G~ deletes one char forward. ~^H~ deletes one char backward
-+ ~^T~ deletes the word forward, ~^[H~ deletes the word backward,~^[Y~ deletes the whole word
++ ~^T~ deletes the word forward, ~^[H~ deletes the word backward, ~^[Y~ deletes the whole word
 + ~^QY~ deletes the line forward, ~^QH~ deletes the line backward, ~^Y~ deletes the whole line
 
 The purpose is to make the installation/uninstallation easy and minimal,
@@ -29,8 +29,8 @@ application key bindings.
     with ZW keybindings
   - less: view and search files and man pages using ZW keybindings
   - zsh: zwsh theme/mode that allows to use ZW keybindings in zsh and that
-    behaves like Zpm3/Wordstar (+?  option to install keybindings only without
-    the theme ?+)
+    behaves like Zpm3/Wordstar (?  add option to install keybindings only without
+    the theme ?)
   - mksh: TODO: create a mode (?if possible ?)
   - Midnight Commander: TODO
 + editors
