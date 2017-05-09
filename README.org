@@ -15,6 +15,7 @@ delete char/word/line keybindings:
 + ~^G~ deletes one char forward. ~^H~ deletes one char backward
 + ~^T~ deletes the word forward, ~^[H~ deletes the word backward, ~^[Y~ deletes the whole word
 + ~^QY~ deletes the line forward, ~^QH~ deletes the line backward, ~^Y~ deletes the whole line
++ editpad version delete line: ~QT~ left, ~QY~ right
 
 The purpose is to make the installation/uninstallation easy and minimal,
 which can be useful to configure a new system or a user account.  It can

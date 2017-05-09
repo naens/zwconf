@@ -155,10 +155,21 @@
 					; (global-set-key (kbd "C-x C-x") 'mode-specific-command-prefix)
 
 ;; TODO: save/get kb/kk line and column...
-(string-to-number (format-mode-line "%l"))
-(string-to-number (format-mode-line "%c"))
+;;(string-to-number (format-mode-line "%l"))
+;;(string-to-number (format-mode-line "%c"))'
 
-;; TODO: do not move selection on insertion on a line before selection...
+(defun overlay-modification (overlay test begin-range end-range &optional length)
+  "overlay modification hook"
+  (if test
+      (let ((fromc (overlay-get overlay 'fromc))
+	    (toc (overlay-get overlay 'toc)) ;todo: measure max line length...
+	    (begin (line-beginning-position)))
+	(message "fromc=%d toc=%d begin=%d" fromc toc begin)
+	(move-overlay overlay (+ begin fromc) (+ begin toc)))))
+		  
+
+(setq block nil)
+; TODO: do not move selection on insertion on a line before selection...
 (defun select-rect (froml fromc tol toc)
   "selects the rectangle"
   (setq line froml)
@@ -179,6 +190,11 @@
       (setq bl (make-overlay from to))
       (setq block (cons bl block))
       (overlay-put bl 'face 'region)
+      (overlay-put bl 'fromc fromc)
+      (overlay-put bl 'toc toc)
+      (overlay-put bl 'modification-hooks (cons 'overlay-modification (overlay-get bl 'modification-hooks)))
+      (overlay-put bl 'insert-in-front-hooks (cons 'overlay-modification (overlay-get bl 'insert-in-front-hooks)))
+      (overlay-put bl 'insert-behind-hooks (cons 'overlay-modification (overlay-get bl 'insert-behind-hooks)))
       (setq line (1+ line)))))
 
 (defun delblock ()
