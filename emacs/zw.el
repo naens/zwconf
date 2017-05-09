@@ -84,11 +84,9 @@
   (interactive "p")
   (if (not mark-active)
       (progn
-	(if (boundp 'block)
-            (progn
-              (delete-overlay block)
-              (makunbound 'block)))
-	(set-mark-command nil))))
+        (if block
+            (delblock)
+        (set-mark-command nil)))))
 (global-set-key (kbd "C-k b") 'kb)
 
 (defun kk (arg)
@@ -96,16 +94,15 @@
   (interactive "p")
   (if mark-active
       (let ((kb (min (mark) (point)))
-	    (kk (max (mark) (point))))
-	(setq mkb (make-marker))
-	(set-marker mkb kb)
-	(setq mkk (make-marker))
-	(set-marker mkk kk)
-	(set-mark-command nil)
-	(message "kb=%d kk=%d" kb kk)
-	(setq mark-active nil)
-	(setq block (make-overlay kb kk))
-	(overlay-put block 'face 'region))))
+            (kk (max (mark) (point))))
+        (setq mkb (make-marker))
+        (set-marker mkb kb)
+        (setq mkk (make-marker))
+        (set-marker mkk kk)
+        (set-mark-command nil)
+        (message "kb=%d kk=%d" kb kk)
+        (setq mark-active nil)
+        (draw-block))))
 (global-set-key (kbd "C-k k") 'kk)
 
 (defun kh (arg)
@@ -115,61 +112,86 @@
       (progn
         (setq kb nil)
         (setq mark-active nil))
-      (if (boundp 'block)
-          (progn
-            (delete-overlay block)
-            (makunbound 'block)))))
+      (if block
+          (delblock)
+          (draw-block))))
 (global-set-key (kbd "C-k h") 'kh)
 
 (defun kc (arg)
   "copies block to current poin"
   (interactive "p")
-  (if (boundp 'block)
+  (if block
       (insert (buffer-substring (marker-position mkb) (marker-position mkk)))))
 (global-set-key (kbd "C-k c") 'kc)
 
 (defun kv (arg)
   "inserts text at point"
   (interactive "p")
-  (if (boundp 'block)
+  (if block
       (let ((len (- (marker-position mkk) (marker-position mkb))))
-	(insert (buffer-substring (marker-position mkb) (marker-position mkk)))
-	(delete-region (marker-position mkb) (marker-position mkk))
-	(set-marker mkb (- (point) len))
-	(set-marker mkk (point))
-	(setq block (make-overlay (marker-position mkb) (marker-position mkk)))
-	(overlay-put block 'face 'region))))
+        (insert (buffer-substring (marker-position mkb) (marker-position mkk)))
+        (delete-region (marker-position mkb) (marker-position mkk))
+        (set-marker mkb (- (point) len))
+        (set-marker mkk (point))
+        (setq block (list (make-overlay (marker-position mkb) (marker-position mkk))))
+        (overlay-put block 'face 'region))))
 (global-set-key (kbd "C-k v") 'kv)
 
 (defun ky (arg)
   "deletes block and undefines kb and kk"
   (interactive "p")
-  (if (boundp 'block
+  (if block
       (progn
-	(delete-region (marker-position mkb) (marker-position mkk))
-	(delete-overlay block)
-        (makunbound 'block)))))
+        (delete-region (marker-position mkb) (marker-position mkk))
+        (delblock))))
 (global-set-key (kbd "C-k y") 'ky)
 
 ;; example
-					; (global-set-key (kbd "C-x C-x") 'mode-specific-command-prefix)
+                                        ; (global-set-key (kbd "C-x C-x") 'mode-specific-command-prefix)
 
 ;; TODO: save/get kb/kk line and column...
 ;;(string-to-number (format-mode-line "%l"))
-;;(string-to-number (format-mode-line "%c"))'
+;;(string-to-number (format-mode-line "%c"))
 
 (defun overlay-modification (overlay test begin-range end-range &optional length)
   "overlay modification hook"
   (if test
       (let ((fromc (overlay-get overlay 'fromc))
-	    (toc (overlay-get overlay 'toc)) ;todo: measure max line length...
-	    (begin (line-beginning-position)))
-	(message "fromc=%d toc=%d begin=%d" fromc toc begin)
-	(move-overlay overlay (+ begin fromc) (+ begin toc)))))
-		  
+            (toc (overlay-get overlay 'toc)) ;todo: measure max line length...
+            (begin (line-beginning-position))
+            (end (- (line-beginning-position 2) 1)))
+          (message "fromc=%d toc=%d begin=%d end=%d" fromc toc begin end)
+          (move-overlay overlay (min end (+ begin fromc)) (min end (+ begin toc))))))
 
+(defun kn (arg)
+  "switches column mode on and off"
+  (interactive "p")
+  (if block
+      (progn
+        (delblock)
+        (draw-block)
+        (setq kn-column (not kn-column)))))
+(global-set-key (kbd "C-k n") 'kn)
+
+(defun draw-block ()
+  (cond (kn-column
+         (save-excursion
+           (goto-char (marker-position mkb))
+           (setq froml (string-to-number (format-mode-line "%l")))
+           (setq fromc (string-to-number (format-mode-line "%c")))
+           (goto-char (marker-position mkk))
+           (setq tol (string-to-number (format-mode-line "%l")))
+           (setq toc (string-to-number (format-mode-line "%c")))
+           (select-rect froml fromc tol toc)))
+        (t (select-block))))
+
+(defun select-block ()
+  (setq block (list (make-overlay (marker-position mkb) (marker-position mkk))))
+  (overlay-put (car block) 'face 'region))
+  
+(setq kn-column nil)
 (setq block nil)
-; TODO: do not move selection on insertion on a line before selection...
+
 (defun select-rect (froml fromc tol toc)
   "selects the rectangle"
   (setq line froml)
@@ -177,35 +199,40 @@
     (goto-char (point-min))
     (setq start (point))
     (goto-char start)
-    (forward-line line)
+    (forward-line (- line 1))
     (delblock)
     (setq block nil)
-    (while (< line tol)
+    (while (<= line tol)
       (setq pos (point))
       (forward-line 1)
       (setq nextpos (point))
       (setq from (min (- nextpos 1) (+ pos fromc)))
       (setq to (min (- nextpos 1) (+ pos toc)))
-      (message (format "line=%d pos=%d from=%d to=%d" line pos from to))
+;;      (message (format "line=%d pos=%d from=%d to=%d" line pos from to))
       (setq bl (make-overlay from to))
       (setq block (cons bl block))
       (overlay-put bl 'face 'region)
       (overlay-put bl 'fromc fromc)
       (overlay-put bl 'toc toc)
-      (overlay-put bl 'modification-hooks (cons 'overlay-modification (overlay-get bl 'modification-hooks)))
-      (overlay-put bl 'insert-in-front-hooks (cons 'overlay-modification (overlay-get bl 'insert-in-front-hooks)))
-      (overlay-put bl 'insert-behind-hooks (cons 'overlay-modification (overlay-get bl 'insert-behind-hooks)))
+      (overlay-put bl 'modification-hooks
+                   (cons 'overlay-modification (overlay-get bl 'modification-hooks)))
+      (overlay-put bl 'insert-in-front-hooks
+                   (cons 'overlay-modification (overlay-get bl 'insert-in-front-hooks)))
+      (overlay-put bl 'insert-behind-hooks
+                   (cons 'overlay-modification (overlay-get bl 'insert-behind-hooks)))
       (setq line (1+ line)))))
 
 (defun delblock ()
     (cl-labels ((rec (bl)
-		     (if bl
-			 (progn
-			   (delete-overlay (car bl))
-			   (rec (cdr bl))))))
-      (rec block)))
+                     (if bl
+                         (progn
+                           (delete-overlay (car bl))
+                           (rec (cdr bl))))))
+      (rec block)
+      (setq block nil)))
 
 (delblock)
 
-(select-rect 175 10 185 20)
-  
+(select-rect 195 10 205 20)
+
+
