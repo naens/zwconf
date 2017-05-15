@@ -37,7 +37,7 @@ d=$(dirname $0)
 
 # less: ~/.lesskey
 
-# zsh: $ZDOTDIR/.zshrc, ~/.zshrc
+# zsh: $ZDOTDIR/.zshrc, ~/.zshrc (+ .zshenv, .zprofile, .zlogin, .zlogout)
 
 # mksh: ~/.mkshrc
 
