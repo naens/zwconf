@@ -33,13 +33,26 @@ test -n has_mutt && echo mutt
 
 d=$(dirname $0)
 
-# TODO: menu install and backup files
-#       check if config exists: no config => no backup
+# bash/readline: $INPUTRC, ~/.inputrc
+
+# less: ~/.lesskey
+
+# zsh: $ZDOTDIR/.zshrc, ~/.zshrc
+
+# mksh: ~/.mkshrc
+
+# mc
 
 # joe: dotjoe/ -> ~/.joe, jstarrc -> .jstarrc
 if [ -n $has_jstar ]; then
     cp -Trvi $d/joe/dotjoe ~/.joe
     cp -vi $d/joe/jstarrc ~/.jstarrc
 fi
+
+# emacs
+
+# i3 ~/.i3/config, ~/.config/i3
+
+# mutt: ~/.muttrc, ~/.mutt/muttrc
 
     

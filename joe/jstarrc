@@ -947,8 +947,8 @@ delword		^[ y
 delword		^[ Y
 dnarw		.kd		Go down
 dnarw		^X
-dnarw		^[ O B
-dnarw		^[ [ B
+ dnarw		^[ O B
+ dnarw		^[ [ B
  dnarw		^# B
 dnslide		^Z
 dnslide,dnslide,dnslide,dnslide		MWDOWN
@@ -1119,7 +1119,7 @@ eolmenu			^[ [ 8 ~		RxVT
  eolmenu			^# SP @			Amiga
 
 abort		^[ ^[
-backsmenu	^?
+ backsmenu	^?
 backsmenu	^H
 bofmenu		^Q R
 bofmenu		^Q ^R
@@ -1186,7 +1186,7 @@ type		U+0 TO U+10FFFF
 "	"	^I		Tab
 ""		^H		Backspace
 ""		^M		Return
-""		^?		Backspace
+ ""		^?		Backspace
 
 :vtshell		Input to ANSI shell windows
 :inherit main
@@ -1205,4 +1205,4 @@ type		U+0 TO U+10FFFF
 "	"	^I		Tab
 ""		^H		Backspace
 ""		^M		Return
-""		^?		Backspace
+ ""		^?		Backspace

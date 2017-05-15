@@ -1,6 +1,11 @@
 ;;; trying to define Zpm3/Wordstar key bindings for emacs
 (setq global-map (make-keymap))
 
+;; doesn't work. TODO: fix org mode
+;;;(setq org-replace-disputed-keys t)
+
+;; TODO: remove conflicting functionality, ex C-Space
+
 (setq alphabet "abcdefghijklmnopqrstuvwxyz")
 
 (defun free-letter (c)

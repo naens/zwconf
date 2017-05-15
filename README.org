@@ -37,6 +37,7 @@ application key bindings.
 + editors
   - joe: jstarrc configuration (? improve behaviour ?) (? add modes ?)
   - emacs: TODO
+  - nano: if possible... (? use M-Q, M-X, M-S instead of ^Q- ?)
 + i3wm: window navigation
 + mutt: TODO
 + (? dos programs: 4dos, dos navigator configurations ?)
