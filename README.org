@@ -35,7 +35,7 @@ application key bindings.
   - mksh: TODO: create a mode (?if possible ?)
   - Midnight Commander: TODO
 + editors
-  - joe: jstarrc configuration
+  - joe: jstarrc configuration (? improve behaviour ?) (? add modes ?)
   - emacs: TODO
 + i3wm: window navigation
 + mutt: TODO
