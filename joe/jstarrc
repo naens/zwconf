@@ -733,10 +733,10 @@ nextw		^K N
 nextw		^K ^N
 nextw		^K n
 pgdn		.kN		Screen down
-pgdn		^[ [ 6 ~
+ pgdn		^[ [ 6 ~
  pgdn		^# S
 pgup		.kP		Screen up
-pgup		^[ [ 5 ~
+ pgup		^[ [ 5 ~
  pgup		^# T
 play		^[ 0 TO 9
 prevw		^K P
@@ -826,29 +826,29 @@ ispellword	^Q ^N
  :def shell3 if,"is_shell==0",then,tw1,mfit,endif,scratch,"* Shell 3 *",rtn,vtbknd!,eof
  :def shell4 if,"is_shell==0",then,tw1,mfit,endif,scratch,"* Shell 4 *",rtn,vtbknd!,eof
 
-paste			^[ ] 5 2 ;		Base64 paste (obsolete)
+ paste			^[ ] 5 2 ;		Base64 paste (obsolete)
 brpaste			^[ [ 2 0 0 ~		Bracketed paste
 brpaste_done		^[ [ 2 0 1 ~		Bracketed paste done
 
-insc			^[ [ 2 ~
-insc			^[ [ L			SCO
+ insc			^[ [ 2 ~
+ insc			^[ [ L			SCO
 
-delch			^[ [ 3 ~
+ delch			^[ [ 3 ~
 
-pgup			^[ [ I		SCO
+ pgup			^[ [ I		SCO
 
-pgdn			^[ [ G		SCO
+ pgdn			^[ [ G		SCO
 
-home			^[ [ 1 ~		Putty, Linux, Cygwin
-home			^[ [ H			Xterm, Konsole, SCO
-home			^[ O H			gnome-terminal
-home			^[ [ 7 ~		RxVT
+ home			^[ [ 1 ~		Putty, Linux, Cygwin
+ home			^[ [ H			Xterm, Konsole, SCO
+ home			^[ O H			gnome-terminal
+ home			^[ [ 7 ~		RxVT
  home			^# SP A			Amiga
 
-eol			^[ [ 4 ~		Putty, Linux, Cygwin, ssh
-eol			^[ [ F			Xterm, Konsole, SCO
-eol			^[ O F			gnome-terminal
-eol			^[ [ 8 ~		RxVT
+ eol			^[ [ 4 ~		Putty, Linux, Cygwin, ssh
+ eol			^[ [ F			Xterm, Konsole, SCO
+ eol			^[ O F			gnome-terminal
+ eol			^[ [ 8 ~		RxVT
  eol			^# SP @			Amiga
 
 rtarw,prevword,markb,nextword,markk	^K T
@@ -890,7 +890,7 @@ psh,drop,fwrdc,query,markk,blkdel	^Q ^T	Cut to char
 quote8		^\		Quote Meta chars
 quote		^P		Quote Ctrl chars
 
-backs		^?		Backspace
+ backs		^?		Backspace
 backs		^H
 bknd		^K '		Shell window
 bkwdc		^Q H U+0 TO U+10FFFF
@@ -1004,8 +1004,8 @@ line		^Q ^I
 line		^Q i
 ltarw		.kl		Go left
 ltarw		^S
-ltarw		^[ O D
-ltarw		^[ [ D
+ ltarw		^[ O D
+ ltarw		^[ [ D
  ltarw		^# D
 markb		^K B		Set beginning of marked block
 markb		^K ^B
@@ -1031,15 +1031,15 @@ redo		^^		Redo changes
 rindent		^K .		Indent to right
 rtarw		.kr		Go right
 rtarw		^D
-rtarw		^[ O C
-rtarw		^[ [ C
+ rtarw		^[ O C
+ rtarw		^[ [ C
  rtarw		^# C
 save		^K D		Save file
 save		^K S
 save		^K ^D
 save		^K ^S
 save		^K d
-save		^K s
+savenow		^K s
 setmark		^K 0 TO 9
 shrinkw		^K T		Shrink window
 shrinkw		^K ^T
@@ -1063,8 +1063,8 @@ undo		^U		Undo changes
 undo		^_
 uparw		.ku		Go up
 uparw		^E
-uparw		^[ O A
-uparw		^[ [ A
+ uparw		^[ O A
+ uparw		^[ [ A
  uparw		^# A
 upslide		^W
 upslide,upslide,upslide,upslide		MWUP
@@ -1091,14 +1091,14 @@ abort		^C
 complete	^I
 dnarw,eol	.kd		Go down
 dnarw,eol	^X
-dnarw,eol	^[ O B
-dnarw,eol	^[ [ B
+ dnarw,eol	^[ O B
+ dnarw,eol	^[ [ B
  dnarw,eol	^# B
 uparw,eol	.ku		Go up
  uparw,eol	^# A
 uparw,eol	^E
-uparw,eol	^[ O A
-uparw,eol	^[ [ A
+ uparw,eol	^[ O A
+ uparw,eol	^[ [ A
 
 :menu			Selection menus
 :inherit windows
