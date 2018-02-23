@@ -33,9 +33,23 @@ test -n has_mutt && echo mutt
 
 d=$(dirname $0)
 
-# bash/readline: $INPUTRC, ~/.inputrc
+function ask() {
+	read -p "Do you want to install config files for $1? (Y/N)" yn
+	case $yn
+		in [Yy]* ) return 0;;
+		* ) return 1;;
+	esac
+}
+
+# bash/readline: zwinputrc, ~/.inputrc
+if [ -n $has_bash -o -n $has_readline ]; then
+	ask inputrc && cp -vi zwinputrc ~/.inputrc
+fi
 
 # less: ~/.lesskey
+if [ -n $has_less ]; then
+	ask less && cp -vi zwlessrc ~/.lesskey
+fi
 
 # zsh: $ZDOTDIR/.zshrc, ~/.zshrc (+ .zshenv, .zprofile, .zlogin, .zlogout)
 
@@ -45,8 +59,10 @@ d=$(dirname $0)
 
 # joe: dotjoe/ -> ~/.joe, jstarrc -> .jstarrc
 if [ -n $has_jstar ]; then
-    cp -Trvi $d/joe/dotjoe ~/.joe
-    cp -vi $d/joe/jstarrc ~/.jstarrc
+    if ask joe; then
+	    cp -Trvi $d/joe/dotjoe ~/.joe
+    	cp -vi $d/joe/jstarrc ~/.jstarrc
+    fi
 fi
 
 # emacs
@@ -55,4 +71,3 @@ fi
 
 # mutt: ~/.muttrc, ~/.mutt/muttrc
 
-    
