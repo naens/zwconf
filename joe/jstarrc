@@ -530,7 +530,7 @@ mode,"spaces",rtn	% % No tabs %Zspaces%
 \i \i\|^S left ^D right \|^R  prev. screen \|^KB begin \|^G  char  \|^B  reformat \|^KX save  \|\i \i
 \i \i\|^E up   ^X down  \|^C  next screen  \|^KK end   \|^Y  line  \|^V  overtype \|^KQ abort \|\i \i
 \i \i\|^A previous word \|^QS beg. of line \|^KV move  \|^T  >word \|^]  refresh  \|^KZ shell \|\i \i
-\i \i\|^F next word     \|^QD end of line  \|^KC copy  \|^QG >line \|^O  options  \|\uFILE\u      \|\i \i
+\i \i\|^F next word     \|^QD end of line  \|^KC copy  \|^QY >line \|^O  options  \|\uFILE\u      \|\i \i
 \i \i\|\uSEARCH\u           \|^QR top of file  \|^KW file  \|^U  undo  \|\uSPELL\u        \|^KE edit  \|\i \i
 \i \i\|^QF find text    \|^QC end of file  \|^KY delete \|^^ redo  \|^QN word     \|^KR insert\|\i \i
 \i \i\|^L  find next    \|^QI to line No.  \|^K/ filter \|         \|^QL file     \|^KD save  \|\i \i
@@ -733,10 +733,10 @@ nextw		^K N
 nextw		^K ^N
 nextw		^K n
 pgdn		.kN		Screen down
- pgdn		^[ [ 6 ~
+pgdn		^[ [ 6 ~
  pgdn		^# S
 pgup		.kP		Screen up
- pgup		^[ [ 5 ~
+pgup		^[ [ 5 ~
  pgup		^# T
 play		^[ 0 TO 9
 prevw		^K P
@@ -826,29 +826,29 @@ ispellword	^Q ^N
  :def shell3 if,"is_shell==0",then,tw1,mfit,endif,scratch,"* Shell 3 *",rtn,vtbknd!,eof
  :def shell4 if,"is_shell==0",then,tw1,mfit,endif,scratch,"* Shell 4 *",rtn,vtbknd!,eof
 
- paste			^[ ] 5 2 ;		Base64 paste (obsolete)
+paste			^[ ] 5 2 ;		Base64 paste (obsolete)
 brpaste			^[ [ 2 0 0 ~		Bracketed paste
 brpaste_done		^[ [ 2 0 1 ~		Bracketed paste done
 
- insc			^[ [ 2 ~
- insc			^[ [ L			SCO
+insc			^[ [ 2 ~
+insc			^[ [ L			SCO
 
- delch			^[ [ 3 ~
+delch			^[ [ 3 ~
 
- pgup			^[ [ I		SCO
+pgup			^[ [ I		SCO
 
- pgdn			^[ [ G		SCO
+pgdn			^[ [ G		SCO
 
- home			^[ [ 1 ~		Putty, Linux, Cygwin
- home			^[ [ H			Xterm, Konsole, SCO
- home			^[ O H			gnome-terminal
- home			^[ [ 7 ~		RxVT
+home			^[ [ 1 ~		Putty, Linux, Cygwin
+home			^[ [ H			Xterm, Konsole, SCO
+home			^[ O H			gnome-terminal
+home			^[ [ 7 ~		RxVT
  home			^# SP A			Amiga
 
- eol			^[ [ 4 ~		Putty, Linux, Cygwin, ssh
- eol			^[ [ F			Xterm, Konsole, SCO
- eol			^[ O F			gnome-terminal
- eol			^[ [ 8 ~		RxVT
+eol			^[ [ 4 ~		Putty, Linux, Cygwin, ssh
+eol			^[ [ F			Xterm, Konsole, SCO
+eol			^[ O F			gnome-terminal
+eol			^[ [ 8 ~		RxVT
  eol			^# SP @			Amiga
 
 rtarw,prevword,markb,nextword,markk	^K T
@@ -890,7 +890,7 @@ psh,drop,fwrdc,query,markk,blkdel	^Q ^T	Cut to char
 quote8		^\		Quote Meta chars
 quote		^P		Quote Ctrl chars
 
- backs		^?		Backspace
+backs		^?		Backspace
 backs		^H
 bknd		^K '		Shell window
 bkwdc		^Q H U+0 TO U+10FFFF
@@ -929,26 +929,19 @@ center		^K A		Center line
 center		^K ^A
 center		^K a
 delbol		^Q ^H
-delbol		^Q H
-delbol		^Q h
 delbol		^Q ^?
 delbol		^Q .kD
 delch		.kD		Delete character
 delch		^G
-deleol		^Q y		Delete to end of line
+deleol		^Q Y		Delete to end of line
 deleol		^Q ^Y
 deleol		^Q y
 dellin		^Y		Delete entire line
 delw		^T		Delete word to right
-backw		^[ h
-backw		^[ H
-:def delword nextword,prevword,delw
-delword		^[ y
-delword		^[ Y
 dnarw		.kd		Go down
 dnarw		^X
- dnarw		^[ O B
- dnarw		^[ [ B
+dnarw		^[ O B
+dnarw		^[ [ B
  dnarw		^# B
 dnslide		^Z
 dnslide,dnslide,dnslide,dnslide		MWDOWN
@@ -983,9 +976,9 @@ qrepl		^Q a
 filt		^K /		Filter block
 fnext		^L		Find next
 format		^B		Format paragraph
- fwrdc		^Q G U+0 TO U+10FFFF
- fwrdc		^Q ^G U+0 TO U+10FFFF
- fwrdc		^Q g U+0 TO U+10FFFF
+fwrdc		^Q G U+0 TO U+10FFFF
+fwrdc		^Q ^G U+0 TO U+10FFFF
+fwrdc		^Q g U+0 TO U+10FFFF
 gomark		^Q 0 TO 9
 groww		^K G		Grow window
 groww		^K ^G
@@ -1004,8 +997,8 @@ line		^Q ^I
 line		^Q i
 ltarw		.kl		Go left
 ltarw		^S
- ltarw		^[ O D
- ltarw		^[ [ D
+ltarw		^[ O D
+ltarw		^[ [ D
  ltarw		^# D
 markb		^K B		Set beginning of marked block
 markb		^K ^B
@@ -1031,8 +1024,8 @@ redo		^^		Redo changes
 rindent		^K .		Indent to right
 rtarw		.kr		Go right
 rtarw		^D
- rtarw		^[ O C
- rtarw		^[ [ C
+rtarw		^[ O C
+rtarw		^[ [ C
  rtarw		^# C
 save		^K D		Save file
 save		^K S
@@ -1063,8 +1056,8 @@ undo		^U		Undo changes
 undo		^_
 uparw		.ku		Go up
 uparw		^E
- uparw		^[ O A
- uparw		^[ [ A
+uparw		^[ O A
+uparw		^[ [ A
  uparw		^# A
 upslide		^W
 upslide,upslide,upslide,upslide		MWUP
@@ -1091,14 +1084,14 @@ abort		^C
 complete	^I
 dnarw,eol	.kd		Go down
 dnarw,eol	^X
- dnarw,eol	^[ O B
- dnarw,eol	^[ [ B
+dnarw,eol	^[ O B
+dnarw,eol	^[ [ B
  dnarw,eol	^# B
 uparw,eol	.ku		Go up
  uparw,eol	^# A
 uparw,eol	^E
- uparw,eol	^[ O A
- uparw,eol	^[ [ A
+uparw,eol	^[ O A
+uparw,eol	^[ [ A
 
 :menu			Selection menus
 :inherit windows
@@ -1119,7 +1112,7 @@ eolmenu			^[ [ 8 ~		RxVT
  eolmenu			^# SP @			Amiga
 
 abort		^[ ^[
- backsmenu	^?
+backsmenu	^?
 backsmenu	^H
 bofmenu		^Q R
 bofmenu		^Q ^R
@@ -1186,7 +1179,7 @@ type		U+0 TO U+10FFFF
 "	"	^I		Tab
 ""		^H		Backspace
 ""		^M		Return
- ""		^?		Backspace
+""		^?		Backspace
 
 :vtshell		Input to ANSI shell windows
 :inherit main
@@ -1205,4 +1198,4 @@ type		U+0 TO U+10FFFF
 "	"	^I		Tab
 ""		^H		Backspace
 ""		^M		Return
- ""		^?		Backspace
+""		^?		Backspace
