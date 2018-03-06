@@ -10,3 +10,42 @@ This plugin implements the following WordStar actions:
  * ~^KY~ /delete/
  * ~^U~ /unerase/
  * ~^KH~ /toggle block visible/
+
+** delete action that save the selection and make it possible to paste:
+ * ~^Y~ /line/
+ * ~^T~ /word right/
+ * ~^QY~ /line right/
+ * ~^QH~ /line left/
+
+* Existing actions in Idea similar to WordStar
+For these actions, changing the key bindings is enough:
+
+** delete
+ * ~^H~ /right/
+ * ~^G~ /left/
+
+** cursor
+ * ~^S~ /left/
+ * ~^D~ /right/
+ * ~^E~ /up/
+ * ~^X~ /down/
+ * ~^A~ /word left/
+ * ~^F~ /word right/
+ * ~^R~ /page up/
+ * ~^C~ /page down/
+ * ~^W~ /scroll up/
+ * ~^Z~ /scroll down/
+ * ~^QA~ /line start/
+ * ~^QF~ /line end/
+ * ~^QR~ /doc start/
+ * ~^QC~ /doc end/
+ * ~^QE~ /page start/
+ * ~^QX~ /page end/
+ * ~^QW~ /scroll start/
+ * ~^QZ~ /scroll end/
+
+** file open and save
+ * ~KE~ /file open/
+ * ~KS~ /file save/
+ * ~KX~ /file save and close/
+ * ~KQ~ /file close/
