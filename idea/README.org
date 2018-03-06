@@ -1,0 +1,12 @@
+#+TITLE: zwidea plugin
+
+* Overview
+This plugin implements the following WordStar actions:
+
+ * ~^KB~ /mark begin/
+ * ~^KK~ /mark end/
+ * ~^KC~ /copy/
+ * ~^KV~ /move/
+ * ~^KY~ /delete/
+ * ~^U~ /unerase/
+ * ~^KH~ /toggle block visible/
