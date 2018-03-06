@@ -45,7 +45,10 @@ For these actions, changing the key bindings is enough:
  * ~^QZ~ /scroll end/
 
 ** file open and save
- * ~KE~ /file open/
- * ~KS~ /file save/
- * ~KX~ /file save and close/
- * ~KQ~ /file close/
+ * ~^KE~ /file open/
+ * ~^KS~ /file save/
+ * ~^KX~ /file save and close/
+ * ~^KW~ OR ~KO~ /file save as/
+   - In WordStar: ~^KW~ writes block to file, ~^KO~ copies files.
+   - In Joe jstar: ~^KW~ saves file under another name.
+ * ~^KQ~ /file close/
