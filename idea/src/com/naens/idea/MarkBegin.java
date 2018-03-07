@@ -4,8 +4,10 @@ package com.naens.idea;// Copyright 2000-2018 JetBrains s.r.o. Use of this sourc
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.*;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.UserDataHolder;
 
@@ -13,21 +15,30 @@ public class MarkBegin extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+        Project project = e.getData(PlatformDataKeys.PROJECT);
         Editor editor = e.getData(CommonDataKeys.EDITOR);
         CaretModel caretModel = editor.getCaretModel();
 
         Caret primaryCaret = caretModel.getPrimaryCaret();
-        Caret markBegin = editor.getUserData(Mark.beginKey);
+        Boolean visible = editor.getUserData(Mark.visibleKey);
+        Integer markBegin = editor.getUserData(Mark.beginKey);
+        Integer markEnd = editor.getUserData(Mark.endKey);
         int offset = primaryCaret.getOffset();
         if (markBegin == null) {
-            markBegin = caretModel.addCaret(primaryCaret.getVisualPosition(), false);
-            editor.putUserData(Mark.beginKey, markBegin);
-        } else if (markBegin.getOffset() == offset) {
-            editor.putUserData(Mark.beginKey, null);
-            caretModel.removeCaret(markBegin);
+            markBegin = primaryCaret.getOffset();
+        } else if (markBegin == offset) {
+            markBegin = null;
         } else {
-            markBegin.moveToOffset(offset);
+            markBegin = primaryCaret.getOffset();
         }
+        if (markBegin == null && markEnd == null) {
+            visible = null;
+        } else {
+            visible = true;
+        }
+        editor.putUserData(Mark.visibleKey, visible);
+        editor.putUserData(Mark.beginKey, markBegin);
+        Messages.showMessageDialog(project, Mark.state(editor), "Mark Begin", Messages.getInformationIcon());
         Mark.updateDisplay(editor);
     }
 }

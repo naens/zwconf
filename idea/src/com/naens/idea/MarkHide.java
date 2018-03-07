@@ -11,34 +11,17 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 
-public class MarkEnd extends AnAction {
+public class MarkHide extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
         Project project = e.getData(PlatformDataKeys.PROJECT);
         Editor editor = e.getData(CommonDataKeys.EDITOR);
-        CaretModel caretModel = editor.getCaretModel();
 
-        Caret primaryCaret = caretModel.getPrimaryCaret();
         Boolean visible = editor.getUserData(Mark.visibleKey);
-        Integer markBegin = editor.getUserData(Mark.beginKey);
-        Integer markEnd = editor.getUserData(Mark.endKey);
-        int offset = primaryCaret.getOffset();
-        if (markEnd == null) {
-            markEnd = primaryCaret.getOffset();
-        } else if (markEnd == offset) {
-            markEnd = null;
-        } else {
-            markEnd = primaryCaret.getOffset();
-        }
-        if (markBegin == null && markEnd == null) {
-            visible = null;
-        } else {
-            visible = true;
-        }
+        visible = visible == null ? null : !visible;
         editor.putUserData(Mark.visibleKey, visible);
-        editor.putUserData(Mark.endKey, markEnd);
-        Messages.showMessageDialog(project, Mark.state(editor), "Mark End", Messages.getInformationIcon());
+        Messages.showMessageDialog(project, Mark.state(editor), "Mark Hide", Messages.getInformationIcon());
         Mark.updateDisplay(editor);
     }
 }

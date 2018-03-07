@@ -1,8 +1,8 @@
 <idea-plugin>
   <id>com.your.company.unique.plugin.id</id>
-  <name>Plugin display name here</name>
-  <version>1.0</version>
-  <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+  <name>zwidea</name>
+  <version>0.0</version>
+  <vendor email="naens@gmx.com" url="">naens</vendor>
 
   <description><![CDATA[
       Enter short description for your plugin here.<br>
@@ -35,10 +35,16 @@
       <action id="Myplugin.Textboxes" class="com.naens.idea.TextBoxes" text="Text _Boxes" description="A test menu item"/>
     </group>
     <action id="mark_begin" class="com.naens.idea.MarkBegin" text="Mark Begin">
-      <add-to-group group-id="EditMenu" anchor="first"/>
+      <add-to-group group-id="EditMenu" anchor="after" relative-to-action="CutCopyPasteGroup"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl K" second-keystroke="B"/>
     </action>
     <action id="mark_end" class="com.naens.idea.MarkEnd" text="Mark End">
-      <add-to-group group-id="EditMenu" anchor="first"/>
+      <add-to-group group-id="EditMenu" anchor="after" relative-to-action="mark_begin"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl K" second-keystroke="K"/>
+    </action>
+    <action id="mark_hide" class="com.naens.idea.MarkHide" text="Mark Hide">
+      <add-to-group group-id="EditMenu" anchor="after" relative-to-action="mark_begin"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="ctrl K" second-keystroke="H"/>
     </action>
   </actions>
 
