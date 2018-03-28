@@ -33,8 +33,8 @@ test -n has_mutt && echo mutt
 
 d=$(dirname $0)
 
-function ask() {
-	read -p "Do you want to install config files for $1? (Y/N)" yn
+ask() {
+	read -p "Do you want to install config files for $1? (Y/N) " yn
 	case $yn
 		in [Yy]* ) return 0;;
 		* ) return 1;;
@@ -70,4 +70,3 @@ fi
 # i3 ~/.i3/config, ~/.config/i3
 
 # mutt: ~/.muttrc, ~/.mutt/muttrc
-
