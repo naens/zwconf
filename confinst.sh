@@ -49,6 +49,7 @@ fi
 # less: ~/.lesskey
 if [ -n $has_less ]; then
 	ask less && cp -vi zwlessrc ~/.lesskey
+	# TODO: lesskey needs lesskey to be run on startup
 fi
 
 # zsh: $ZDOTDIR/.zshrc, ~/.zshrc (+ .zshenv, .zprofile, .zlogin, .zlogout)
